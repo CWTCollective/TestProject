@@ -1,0 +1,26 @@
+DELIMITER $$
+--
+-- Procedures
+--
+DROP PROCEDURE IF EXISTS `actualizaTicket`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizaTicket` (IN `pTipo` VARCHAR(2), IN `pDescripcion` TEXT, IN `pEstado` INT, IN `pResolucion` TEXT, IN `pNotas` TEXT, IN `pUsuarioEnd` VARCHAR(10), IN `pUsuarioNivel2` VARCHAR(10), IN `inID` DOUBLE, OUT `outHasError` INT)  MODIFIES SQL DATA
+BEGIN
+ DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET outHasError = 1;
+ 
+  UPDATE bajira.ticket 
+     SET Tipo = pTipo, Descripcion = pDescripcion, Estado = pEstado, Resolucion = pResolucion, Notas=pNotas
+	 WHERE ticket.ID = inID;
+ UPDATE bajira.ticket 
+     SET FechaResolucion= Curdate()
+	 WHERE Ticket.ID = inID AND ticket.estado = 4;
+
+UPDATE bajira.ticket, bajira.usuario 
+     SET ticket.UsuarioEnd = usuario.username
+	 WHERE Ticket.ID = inID AND usuario.username= pUsuarioEnd;
+
+UPDATE bajira.ticket, bajira.usuario 
+     SET ticket.UsuarioNivel2 = usuario.username
+	 WHERE Ticket.ID = inID AND usuario.username= pUsuarioNivel2;
+	 	 
+ 
+END$$

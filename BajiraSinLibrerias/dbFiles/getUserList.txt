@@ -1,0 +1,24 @@
+DELIMITER //
+DROP PROCEDURE IF EXISTS bajira.getUserList //
+ 
+CREATE PROCEDURE bajira.getUserList 
+(
+       out outHasError int    
+
+) 
+ 
+READS SQL DATA
+ 
+BEGIN
+ DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET outHasError = 1;
+ 
+ Select userName
+ FROM bajira.usuario
+ WHERE usuario.nivel=3;
+ 
+
+ 
+END//
+ 
+-- restore the default delimiter ';'
+DELIMITER ;           

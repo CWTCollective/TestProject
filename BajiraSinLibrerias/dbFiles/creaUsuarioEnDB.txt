@@ -1,0 +1,15 @@
+CREATE USER 'badmin'@'localhost' IDENTIFIED BY 'badmin';
+GRANT ALL PRIVILEGES ON bajira . * TO 'badmin'@'localhost';
+
+
+CREATE USER 'nivel1-1'@'localhost' IDENTIFIED BY 'nivel1';
+GRANT ALL PRIVILEGES ON bajira . * TO 'nivel1-1'@'localhost';
+
+CREATE USER 'nivel2-1'@'localhost' IDENTIFIED BY 'nivel2';
+GRANT ALL PRIVILEGES ON bajira . * TO 'nivel2-1'@'localhost';
+
+CREATE USER 'test4'@'localhost' IDENTIFIED BY 'test4';
+GRANT ALL PRIVILEGES ON bajira . * TO 'test4'@'localhost';
+
+CREATE USER 'test5'@'localhost' IDENTIFIED BY 'test5';
+GRANT ALL PRIVILEGES ON bajira . * TO 'test5'@'localhost';
